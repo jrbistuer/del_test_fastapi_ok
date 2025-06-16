@@ -1,10 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
 # mysql+pymysql://test:test@localhost:3306/primerapi
-# mysql://avnadmin:AVNS_kM-WueW1pmjX-l6YWRt@mysql-3e797e5d-jrbistuer-1949.e.aivencloud.com:14718/defaultdb?ssl-mode=REQUIRED
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://avnadmin:AVNS_kM-WueW1pmjX-l6YWRt@mysql-3e797e5d-jrbistuer-1949.e.aivencloud.com:14718/primerapi"
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL", "")
+
+print(f"Connecting to database at {SQLALCHEMY_DATABASE_URL}")
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
