@@ -10,7 +10,7 @@ app = FastAPI()
 
 initialize_firebase()
 
-origins = [os.getenv("FRONTEND_URL", "")]
+origins = [os.getenv("FRONTEND_URL", ""), "https://v0-new-project-5yx1vjjggmb-iz4ovmt59-rahms-projects-5ef39cf9.vercel.app/home"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
