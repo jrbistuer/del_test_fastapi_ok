@@ -75,13 +75,6 @@ def select_by_parameters(auth: di_auth, db: di_db, id: int):
     return user
 
 @router.put("/changeemail")
-def change_email(auth: di_auth, db: di_db, user_id: int, new_email: str):
-    auth.update_email(user_id, new_email)
-    user = db.query(Usuaris).filter(Usuaris.US_Id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    user.US_Email = new_email
-    db.add(user)
-    db.commit()
-    db.refresh(user)
+def change_email(auth: di_auth, db: di_db, new_email: str):
+    auth.update_email(auth, new_email)
     return {"message": "Email updated successfully", "user": user}
