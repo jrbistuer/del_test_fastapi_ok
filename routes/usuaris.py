@@ -82,7 +82,7 @@ def select_by_parameters(auth: di_auth, db: di_db, id: int):
 def change_email(auth: di_auth, db: di_db, new_email: EmailRequest):
     print("Changing email to:", new_email.new_email)
     firebase_admin.get_app().update_user(
-        ...firebase_admin.auth.get_user(auth['uid']),
+        auth["uid"],
         email=new_email.new_email
     )
     return {"message": "Email updated successfully"}
