@@ -1,10 +1,9 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from pydantic import BaseModel, Field
 from config.config import get_firebase_user_from_token, get_db
 from sqlalchemy.orm import Session
 from typing import Annotated
-from fastapi import Depends, HTTPException, status
-import firebase_admin
+import firebase_admin.auth as fbauth
 
 from models.models import Usuaris
 
@@ -81,7 +80,7 @@ def select_by_parameters(auth: di_auth, db: di_db, id: int):
 @router.put("/changeemail")
 def change_email(auth: di_auth, db: di_db, new_email: EmailRequest):
     print("Changing email to:", new_email.new_email)
-    firebase_admin.get_app().update_user(
+    fbauth.update_user(
         auth["uid"],
         email=new_email.new_email
     )
