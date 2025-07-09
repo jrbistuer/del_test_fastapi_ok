@@ -25,3 +25,4 @@ class Pedidos(Base):
 
     def __repr__(self):
         return f"<Pedidos(id={self.PED_Id}, user_id={self.PED_Id_User}, nombre={self.PED_Nombre}, descripcion={self.PED_Descripcion}, precio={self.PED_Precio})>"
+

@@ -76,5 +76,6 @@ def select_by_parameters(auth: di_auth, db: di_db, id: int):
 
 @router.put("/changeemail")
 def change_email(auth: di_auth, db: di_db, new_email: str):
+    print("Changing email to:", new_email)
     auth.update_email(auth, new_email)
     return {"message": "Email updated successfully", "user": user}
