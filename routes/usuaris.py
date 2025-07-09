@@ -23,6 +23,9 @@ class UserRequest(BaseModel):
     US_Email: str = Field(..., min_length=1, max_length=100)
     US_Status: bool = True
 
+class EmailRequest(BaseModel):
+    new_email: str = Field(..., min_length=1, max_length=100)
+
 @router.get("/", status_code=status.HTTP_200_OK)
 def select_users(auth: di_auth, db: di_db):
     users = db.query(Usuaris).filter(Usuaris.US_Status == 1).all()
@@ -75,7 +78,7 @@ def select_by_parameters(auth: di_auth, db: di_db, id: int):
     return user
 
 @router.put("/changeemail")
-def change_email(auth: di_auth, db: di_db, new_email: str):
-    print("Changing email to:", new_email)
-    auth.update_email(auth, new_email)
-    return {"message": "Email updated successfully", "user": user}
+def change_email(auth: di_auth, db: di_db, new_email: EmailRequest):
+    print("Changing email to:", new_email.new_email)
+    auth.update_email(auth, new_email.new_email)
+    return {"message": "Email updated successfully"}
